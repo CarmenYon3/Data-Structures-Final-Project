@@ -1,4 +1,8 @@
+#ifndef miniGit_H
+#define miniGit_H
+
 #include <iostream>
+
 
 struct doublyNode{
     int commitNumber;
@@ -16,12 +20,14 @@ struct singlyNode{
 class miniGit{
 
     public:
-        miniGit();
-        ~miniGit();
+        void newRepository();
         void add(std::string filename);
         void remove(std::string filename);
         void commitChanges();
         void checkOut(int version);
+
     private:
         doublyNode head;
 };
+
+#endif

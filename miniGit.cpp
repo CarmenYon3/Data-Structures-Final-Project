@@ -1,13 +1,19 @@
 #include "miniGit.hpp"
 
 miniGit::miniGit(){
-    
+    head = NULL;
 };
 
 miniGit::~miniGit(){
 
+    delete head;
 }
 
+void miniGit::newRepository(){
+    //make a new directory in current folder called .minigit
+    system("mkdir .minigit");
+
+}
 
 void miniGit::add(){
     //prompt user to enter a file name

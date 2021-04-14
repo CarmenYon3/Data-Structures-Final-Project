@@ -3,23 +3,26 @@
 
 #include <iostream>
 
-
-struct doublyNode{
-    int commitNumber;
-    singlyNode * head;
-    doublyNode * previous;
-    doublyNode * next;
-};
-
 struct singlyNode{
     std::string fileName;    // Name of local file
     std::string fileVersion; // Name of file in .minigit folder
-    singlyNode * next;
+    singlyNode* next;
 };
+
+struct doublyNode{
+    int commitNumber;
+    singlyNode* head;
+    doublyNode* previous;
+    doublyNode* next;
+};
+
+
 
 class miniGit{
 
     public:
+        miniGit();
+        ~miniGit();
         void newRepository();
         void add();
         void remove();
@@ -27,7 +30,7 @@ class miniGit{
         void checkOut(int version);
 
     private:
-        doublyNode head;
+        doublyNode* head;
 };
 
 #endif

@@ -21,8 +21,8 @@ class miniGit{
 
     public:
         void newRepository();
-        void add(std::string filename);
-        void remove(std::string filename);
+        void add();
+        void remove();
         void commitChanges();
         void checkOut(int version);
 

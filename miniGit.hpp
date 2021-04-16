@@ -7,6 +7,7 @@ struct singlyNode{
     std::string fileName;    // Name of local file
     std::string fileVersion; // Name of file in .minigit folder
     singlyNode* next;
+    int version;
 };
 
 struct doublyNode{
@@ -28,6 +29,8 @@ class miniGit{
         void remove();
         void commitChanges();
         void checkOut(int version);
+        int getVersion();
+        void printGit();
 
     private:
         doublyNode* head;

@@ -1,35 +1,86 @@
 #include "miniGit.hpp"
 #include <iostream>
-
+//lets go
 using namespace std;
 
 int main(){
 
     miniGit git = miniGit();
 
-    git.newRepository();
 
     //initial menu for adding a new (empty) repository
-    // cout << "Would you like to initialize an empty repository in this directory? (y or n)" << endl;
+    cout << "Would you like to initialize an empty repository in this directory? (y or n)" << endl;
 
-    // while(true){
+    bool check = true;
+    while(check){
 
-    //     char input;
-    //     cin >> input;
+        char input;
+        cin >> input;
 
-    //     switch(input){
-    //         case 'y': 
+        switch(input){
+            case 'y': 
+                git.newRepository();
+                check = false;
+                break;
 
-    //             break;
+            case 'n':
+                cout << "Quitting" << endl;
+                return 0;
 
-    //         case 'n':
+            default:
+                continue;
+        }
+    }
 
-    //             break;
+    
+    while(true){
+        cout << "What would you like to do?" << endl;
+        cout << "(1) Add a file" << endl;
+        cout << "(2) Remove a file" << endl;
+        cout << "(3) Commit Changes" << endl;
+        cout << "(4) Check out a previous version of the repository" << endl;
+        cout << "(5) Quit" << endl;
+        cout << "(6) Print" << endl;
 
-    //         default:
-    //             continue;
-    //     }
-    // }
+        int input;
+        cin >> input;
+
+        switch(input){
+            case 1:
+                git.add();
+                break;
+            case 2:
+                git.remove();
+                break;
+            case 3:
+                git.commitChanges();
+                break;
+            case 4:
+                while(true){
+                    cout << "Version Number: " << endl;
+                    int input;
+                    cin >> input;
+
+                    if(input > git.getVersion() || input < 0){
+                        cout << "Out of range of acceptable values, try again" << endl;
+                        continue;
+                    }
+
+                    git.checkOut(input);
+                }
+
+                break;
+            case 5:
+                cout << "Quitting" << endl;
+                return 0;
+            case 6:
+                git.printGit();
+                break;
+            default:
+                cout << "Invalid input, try agagin" << endl;
+                continue;
+        }
+    }
 
 
 }

@@ -28,7 +28,7 @@ class miniGit{
         void add();
         void remove();
         void commitChanges();
-        void checkOut(int version);
+        void checkOut();
         int getVersion();
         void printGit();
 

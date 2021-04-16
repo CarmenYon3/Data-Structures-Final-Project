@@ -342,7 +342,7 @@ void miniGit::commitChanges(){
 /**
  * Allows the user to check out previous versions of the code
 */
-void miniGit::checkOut(int version){
+void miniGit::checkOut(){
     //prompt user to enter a commit number
     cout << "enter a commit number" << endl;
     int num;
@@ -359,6 +359,9 @@ void miniGit::checkOut(int version){
             cout << "invalid commit number, try again" << endl; 
             continue;
         }
+        else{
+            break;
+        }
     }
 
     //find the node that corresponds to the user input
@@ -374,8 +377,30 @@ void miniGit::checkOut(int version){
 
     while(fileTrav != NULL){
         copyFileFromGit(fileTrav->fileName,fileTrav->fileVersion);
+        fileTrav = fileTrav->next;
     }
     
     //Must disallow add, remove and commit operations when the current version is different from the most recent commit
+
+    int returnVal;
+    cout << "You are viewing a previous version of the repo. Add, remove, and commit are disabled." << endl;
+    cout << "(1) Return to current version" << endl;
+
+    while(true){
+        cin >> returnVal;
+        if(returnVal == 1){
+            break;
+        }
+        else{
+            cout << "Thats not 1 silly" << endl;
+        }
+    }
+
+    singlyNode* returnToOriginal = head->next->head;
+
+    while(returnToOriginal != NULL){
+        copyFileFromGit(returnToOriginal->fileName,returnToOriginal->fileVersion);
+        returnToOriginal = returnToOriginal->next;
+    }
 
 }

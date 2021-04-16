@@ -56,19 +56,7 @@ int main(){
                 git.commitChanges();
                 break;
             case 4:
-                while(true){
-                    cout << "Version Number: " << endl;
-                    int input;
-                    cin >> input;
-
-                    if(input > git.getVersion() || input < 0){
-                        cout << "Out of range of acceptable values, try again" << endl;
-                        continue;
-                    }
-
-                    git.checkOut(input);
-                }
-
+                git.checkOut();
                 break;
             case 5:
                 cout << "Quitting" << endl;

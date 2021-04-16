@@ -122,6 +122,23 @@ void copyFileIntoGit(string fileName, string fileVersion){
     }
 }
 
+/**
+ * Helper function to copy files from .minigit into the working directory
+*/
+void copyFileFromGit(string fileName, string fileVersion){
+    string temp;
+
+    ifstream inFile;
+    inFile.open(".minigit/" + fileVersion);
+
+    ofstream outFile;
+    outFile.open(fileName,ofstream::trunc);
+
+    while(getline(inFile,temp)){
+        outFile << temp << endl;
+    }
+}
+
 int miniGit::getVersion(){
     return head->commitNumber;
 }
@@ -327,12 +344,38 @@ void miniGit::commitChanges(){
 */
 void miniGit::checkOut(int version){
     //prompt user to enter a commit number
-    
+    cout << "enter a commit number" << endl;
+    int num;
+
+
     //For a valid commit number, the files in the current directory should be overwritten by the corresponding files in the 
     //.minigit directory 
     //Issue warning that their changes will not be saved 
+    
+    //get input from user
+    while(true){
+        cin >> num;
+        if(num > head->next->commitNumber){
+            cout << "invalid commit number, try again" << endl; 
+            continue;
+        }
+    }
 
-    //Search through DLL for a node with matching commit number
+    //find the node that corresponds to the user input
+    doublyNode* traverse = head->next;
+    while(traverse != NULL){
+        if(num == traverse->commitNumber){
+            break;
+        }
+        traverse = traverse->next;
+    }
+
+    singlyNode* fileTrav = traverse->head;
+
+    while(fileTrav != NULL){
+        copyFileFromGit(fileTrav->fileName,fileTrav->fileVersion);
+    }
+    
     //Must disallow add, remove and commit operations when the current version is different from the most recent commit
 
 }

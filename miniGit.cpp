@@ -4,6 +4,8 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <filesystem>
+namespace fs = std::filesystem;
 
 
 using namespace std;
@@ -148,7 +150,8 @@ int miniGit::getVersion(){
 */
 void miniGit::newRepository(){
     //make a new directory in current folder called .minigit
-    system("mkdir .minigit");
+fs::remove_all(".minigit"); // removes a directory and its contents
+fs::create_directory(".minigit");  // create a new directory
 
 }
 /**
